@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+body {
+    background: hsl(204 100% 5%);
+    color: white;
+    min-block-size: 100vh;
+    min-inline-size: 100%;
+    padding: 5vmin;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: min(200%, 5vmin);
+    overflow: hidden;
+    /* Hide body scrollbar */
+}
+
+h1,
+p,
+body {
+    margin: 0;
+}
+
+h1 {
+    font-size: 5vmin;
+    line-height: 1.1;
+    max-inline-size: 15ch;
+    margin: auto;
+    color: #00ff00;
+    /* Change to a more readable color */
+}
+
+p {
+    font-family: "Dank Mono", ui-monospace, monospace;
+    margin-top: 1ch;
+    line-height: 1.35;
+    max-inline-size: 40ch;
+    margin: auto;
+}
+
+html {
+    block-size: 100%;
+    inline-size: 100%;
+    text-align: center;
+}
+
+.edit-article-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 174%;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+    background: none;
+    /* Remove background gradient */
+    color: black;
+    /* Ensure text color is white */
+    text-align: center;
+    overflow-y: auto;
+    /* Add vertical scrollbar */
+    max-height: 90vh;
+    /* Adjust height as needed */
+    white-space: pre-line;
+    white-space-collapse: preserve-spaces;
+}
+
+.profile-image {
+    width: 190vh;
+    max-width: 90vh;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: black;
+    /* Ensure label color is white */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: black;
+    /* Ensure input text color is black */
+    background-color: white;
+    /* Ensure input background color is white */
+    white-space: pre-wrap;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #28666e;
+}
+
+.rich-text-editor {
+    height: 300px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: auto;
+    white-space: pre-line;
+    max-width: 98%;
+    /* Collapse multiple newlines into a single newline */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28666e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #1f4d5a;
+}
+
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+    }
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.toolbar button,
+.toolbar select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.toolbar button:hover,
+.toolbar select:hover {
+    background-color: #e4e4e4;
+}

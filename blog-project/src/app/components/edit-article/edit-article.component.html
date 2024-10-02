@@ -1,0 +1,50 @@
+<div class="edit-article-container">
+    <h1>Edit Article</h1>
+    <form [formGroup]="editArticleForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="profile_image">Profile Image</label>
+            <img [src]="editArticleForm.get('profile_image_url')?.value" alt="Profile Image" class="profile-image">
+            <input type="file" id="file" (change)="onFileSelected($event)" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title" class="form-control" required>
+            <div *ngIf="editArticleForm.get('title')?.invalid && editArticleForm.get('title')?.touched">
+                <small class="text-danger">Title is required</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="summary">Content</label>
+            <div class="toolbar">
+                <button type="button" (click)="formatText('bold')"><i class="fas fa-bold"></i></button>
+                <button type="button" (click)="formatText('italic')"><i class="fas fa-italic"></i></button>
+                <button type="button" (click)="formatText('underline')"><i class="fas fa-underline"></i></button>
+                <button type="button" (click)="formatText('justifyLeft')"><i class="fas fa-align-left"></i></button>
+                <button type="button" (click)="formatText('justifyCenter')"><i class="fas fa-align-center"></i></button>
+                <button type="button" (click)="formatText('justifyRight')"><i class="fas fa-align-right"></i></button>
+            </div>
+            <div id="editor" class="rich-text-editor" contenteditable="true" [innerHTML]="sanitizedSummary"></div>
+            <div *ngIf="editArticleForm.controls['summary'].invalid && editArticleForm.controls['summary'].touched">
+                <small class="text-danger">Summary is required</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="author_email">Author Email</label>
+            <input type="text" id="author_email" [value]="userDetails.email" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label for="author_unique_id">Author Unique ID</label>
+            <input type="text" id="author_unique_id" formControlName="author_unique_id" class="form-control" readonly>
+        </div>
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Update Article</button>
+            <button type="button" class="btn btn-secondary" (click)="navigateToBlog()">Back to Blog</button>
+        </div>
+    </form>
+    <div *ngIf="articlesByAuthor">
+        <h2>Articles by Author</h2>
+        <ul>
+            <li *ngFor="let article of articlesByAuthor">{{ article.title }}</li>
+        </ul>
+    </div>
+</div>

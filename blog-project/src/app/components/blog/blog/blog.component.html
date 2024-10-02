@@ -1,0 +1,52 @@
+<header>
+    <div class="overlay">
+        <h1>Welcome to ZentrBlog</h1>
+
+        <h2>Embark on a journey of discovery and reflection. At Zenblog, we explore ideas, share insights, and embrace inspiration in every form. Whether you're here for tech tips, personal stories, or to catch up on the latest trends, there's something for
+            everyone. Let's navigate this journey together with curiosity and a sense of calm.</h2>
+        <br>
+
+        <div class="button-container">
+            <button routerLink="/login" *ngIf="!isLoggedIn()">Go to Login</button>
+            <button (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
+            <button routerLink="/register" *ngIf="!isLoggedIn()">Go to Register</button>
+            <button routerLink="/mp" *ngIf="isLoggedIn()" class="create-article-button">Create Article</button>
+            <input type="text" placeholder="Search by title" [(ngModel)]="searchTerm" (input)="filterBlogs()" />
+
+        </div>
+    </div>
+</header>
+
+<div class="main-content">
+    <section class="articles">
+        <article *ngFor="let blog of filteredBlogs">
+            <div class="article-wrapper">
+                <figure>
+                    <img [src]="blog.profile_image_url" alt="Blog Image" />
+                </figure>
+                <div class="article-body">
+                    <h2>{{ blog.title }}</h2>
+                    <p class="article-summary" [innerHTML]="blog.sanitizedSummary"></p>
+                    <p>Email: {{ blog.author_email }}</p>
+                    <a href="#" class="read-more" (click)="openModal(blog); $event.preventDefault()">
+                        Read more <span class="sr-only"> about</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal" [class.show]="isModalOpen" (click)="closeModalOnOutsideClick($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <!-- Prevent closing on content click -->
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>{{ selectedBlog?.title }}</h2>
+        <div [innerHTML]="selectedBlog?.sanitizedSummary"></div>
+        <button class="scroll-up-button" (click)="scrollToTop()">Scroll to Top</button>
+    </div>
+</div>

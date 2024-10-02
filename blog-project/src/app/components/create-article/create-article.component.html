@@ -1,0 +1,45 @@
+<div class="create-article-container">
+    <h1>Create a Blog</h1>
+    <form [formGroup]="createArticleForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="profile_image">Profile Image</label>
+            <img [src]="createArticleForm.get('profile_image_url')?.value" alt="Profile Image" class="profile-image">
+            <input type="file" id="file" (change)="onFileSelected($event)" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title" class="form-control" required>
+            <div *ngIf="createArticleForm.get('title')?.invalid && createArticleForm.get('title')?.touched">
+                <small class="text-danger">Title is required</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="summary">Blog Contents:</label>
+            <div class="toolbar">
+                <button type="button" (click)="formatText('bold')"><i class="fas fa-bold"></i></button>
+                <button type="button" (click)="formatText('italic')"><i class="fas fa-italic"></i></button>
+                <button type="button" (click)="formatText('underline')"><i class="fas fa-underline"></i></button>
+                <button type="button" (click)="formatText('justifyLeft')"><i class="fas fa-align-left"></i></button>
+                <button type="button" (click)="formatText('justifyCenter')"><i class="fas fa-align-center"></i></button>
+                <button type="button" (click)="formatText('justifyRight')"><i class="fas fa-align-right"></i></button>
+            </div>
+            <div id="editor" class="rich-text-editor" contenteditable="true"></div>
+            <div *ngIf="createArticleForm.controls['summary'].invalid && createArticleForm.controls['summary'].touched">
+                Summary is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="profile_image_url"></label>
+            <input id="profile_image_url" formControlName="profile_image_url" type="text" class="input-field" />
+            <div *ngIf="createArticleForm.controls['profile_image_url'].invalid && createArticleForm.controls['profile_image_url'].touched">
+                Profile Image URL is required.
+            </div>
+            <button type="button" (click)="triggerFileUpload()"></button>
+            <input type="file" id="file" (change)="onFileSelected($event)" style="display: none;" />
+        </div>
+        <div class="button-group">
+            <button type="submit">Create Article</button>
+            <button type="button" class="btn btn-secondary" (click)="navigateToMp()">Back to Profile</button>
+        </div>
+    </form>
+</div>

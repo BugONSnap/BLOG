@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="center">
+        <h2>Please Sign In</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="username">Username:</label>
+                <input id="username" formControlName="username" type="text" />
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input id="password" formControlName="password" type="password" />
+            </div>
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="register-forget opacity">
+            <a routerLink="/register">REGISTER</a>
+        </div>
+        <div class="register-forget opacity">
+            <a routerLink="/blog">Home</a>
+        </div>
+    </div>
+</div>
