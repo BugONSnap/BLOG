@@ -95,6 +95,11 @@ export class CreateArticleComponent implements OnInit {
     document.execCommand(command, false, value);
   }
 
+  changeFontColor(event: any) {
+    const color = event.target.value;
+    document.execCommand('foreColor', false, color);  // Set the font color using the selected value
+  }
+
   navigateToMp(): void {
     this.router.navigate(['/mp']);
   }

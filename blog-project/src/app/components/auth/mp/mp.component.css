@@ -131,6 +131,8 @@ figure img {
 }
 
 .article-body {
+    color: #333 !important;
+    /* Force the text color */
     padding: 20px;
     white-space: pre-wrap;
     /* Ensure white spaces are preserved */
@@ -210,6 +212,8 @@ button:hover {
 }
 
 .modal-content {
+    color: #333;
+    /* Ensure text color in modal is consistent */
     background-color: #fefefe;
     margin: auto;
     padding: 20px;

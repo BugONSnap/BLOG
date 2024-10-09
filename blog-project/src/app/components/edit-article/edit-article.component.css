@@ -50,7 +50,8 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 174%;
+    width: 80%;
+    /* Changed from 100% to 80% */
     max-width: 100%;
     margin: auto;
     padding: 20px;
@@ -59,7 +60,8 @@ html {
     color: black;
     /* Ensure text color is white */
     text-align: center;
-    overflow-y: auto;
+    overflow-x: hidden;
+    /* Changed from overflow-y to overflow-x */
     /* Add vertical scrollbar */
     max-height: 90vh;
     /* Adjust height as needed */
@@ -69,6 +71,7 @@ html {
 
 .profile-image {
     width: 190vh;
+    /* Changed from 40rem to 190vh */
     max-width: 90vh;
     height: auto;
     object-fit: cover;
@@ -81,6 +84,7 @@ html {
 .form-group {
     margin-bottom: 20px;
     width: 100%;
+    /* Changed from 90% to 100% */
 }
 
 .form-group label {
@@ -114,6 +118,7 @@ html {
 .rich-text-editor {
     height: 300px;
     width: 100%;
+    /* Changed from 90% to 100% */
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
@@ -169,4 +174,5 @@ html {
 .toolbar button:hover,
 .toolbar select:hover {
     background-color: #e4e4e4;
+    width: 30px;
 }

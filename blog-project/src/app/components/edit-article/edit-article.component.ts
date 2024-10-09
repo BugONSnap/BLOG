@@ -160,4 +160,9 @@ export class EditArticleComponent implements OnInit {
   formatText(command: string, value: string = '') {
     document.execCommand(command, false, value);
   }
+
+  applyColor(event: any): void {
+    const color = event.target.value;
+    this.formatText('foreColor', color); // Apply the selected color to the text
+  }
 }

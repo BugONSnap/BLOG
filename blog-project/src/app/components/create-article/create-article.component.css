@@ -59,7 +59,7 @@ html {
     color: black;
     /* Ensure text color is white */
     text-align: center;
-    overflow-y: auto;
+    overflow-x: hidden;
     /* Add vertical scrollbar */
     max-height: 90vh;
     /* Adjust height as needed */
@@ -169,4 +169,13 @@ html {
 .toolbar button:hover,
 .toolbar select:hover {
     background-color: #e4e4e4;
+}
+
+.toolbar input[type="color"] {
+    width: 30px;
+    height: 30px;
+    border: none;
+    padding: 0;
+    margin-left: 5px;
+    cursor: pointer;
 }
