@@ -6,9 +6,10 @@
             <img [src]="createArticleForm.get('profile_image_url')?.value" alt="Profile Image" class="profile-image">
             <input type="file" id="file" (change)="onFileSelected($event)" class="form-control">
         </div>
+
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" id="title" formControlName="title" class="form-control" required>
+            <input type="text" id="title" formControlName="title" class="form-control" required maxlength="500">
             <div *ngIf="createArticleForm.get('title')?.invalid && createArticleForm.get('title')?.touched">
                 <small class="text-danger">Title is required</small>
             </div>
@@ -25,6 +26,11 @@
 
                 <!-- Add the color picker here -->
                 <input type="color" id="fontColorPicker" (change)="changeFontColor($event)" title="Choose font color">
+
+                <!-- Add the button for image upload -->
+                <button type="button" (click)="triggerImageUpload()">
+                    <i class="fas fa-image"></i>
+                </button>
             </div>
             <div id="editor" class="rich-text-editor" contenteditable="true"></div>
             <div *ngIf="createArticleForm.controls['summary'].invalid && createArticleForm.controls['summary'].touched">
@@ -45,4 +51,6 @@
             <button type="button" class="btn btn-secondary" (click)="navigateToMp()">Back to Profile</button>
         </div>
     </form>
+    <!-- Add hidden input for image selection -->
+    <input type="file" id="imageUploadInput" (change)="onImagesSelected($event)" style="display: none;" accept="image/*" multiple>
 </div>

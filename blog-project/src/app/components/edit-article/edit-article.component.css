@@ -14,7 +14,6 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: min(200%, 5vmin);
     overflow: hidden;
-    /* Hide body scrollbar */
 }
 
 h1,
@@ -29,7 +28,6 @@ h1 {
     max-inline-size: 15ch;
     margin: auto;
     color: #00ff00;
-    /* Change to a more readable color */
 }
 
 p {
@@ -51,27 +49,20 @@ html {
     flex-direction: column;
     align-items: center;
     width: 80%;
-    /* Changed from 100% to 80% */
     max-width: 100%;
     margin: auto;
     padding: 20px;
     background: none;
-    /* Remove background gradient */
     color: black;
-    /* Ensure text color is white */
     text-align: center;
     overflow-x: hidden;
-    /* Changed from overflow-y to overflow-x */
-    /* Add vertical scrollbar */
     max-height: 90vh;
-    /* Adjust height as needed */
     white-space: pre-line;
     white-space-collapse: preserve-spaces;
 }
 
 .profile-image {
     width: 190vh;
-    /* Changed from 40rem to 190vh */
     max-width: 90vh;
     height: auto;
     object-fit: cover;
@@ -84,7 +75,6 @@ html {
 .form-group {
     margin-bottom: 20px;
     width: 100%;
-    /* Changed from 90% to 100% */
 }
 
 .form-group label {
@@ -92,7 +82,6 @@ html {
     margin-bottom: 5px;
     font-weight: bold;
     color: black;
-    /* Ensure label color is white */
 }
 
 .form-group input,
@@ -103,9 +92,7 @@ html {
     border-radius: 5px;
     font-size: 1em;
     color: black;
-    /* Ensure input text color is black */
     background-color: white;
-    /* Ensure input background color is white */
     white-space: pre-wrap;
 }
 
@@ -118,14 +105,12 @@ html {
 .rich-text-editor {
     height: 300px;
     width: 100%;
-    /* Changed from 90% to 100% */
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     overflow-y: auto;
     white-space: pre-line;
     max-width: 98%;
-    /* Collapse multiple newlines into a single newline */
 }
 
 .button-group {
@@ -174,5 +159,4 @@ html {
 .toolbar button:hover,
 .toolbar select:hover {
     background-color: #e4e4e4;
-    width: 30px;
 }

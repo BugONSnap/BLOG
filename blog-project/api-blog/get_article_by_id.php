@@ -20,10 +20,11 @@ try {
         throw new Exception("Database connection failed: " . $conn->connect_error);
     }
 
-    error_log("Request received: " . print_r($_GET, true)); // Debugging
+    $data = json_decode(file_get_contents("php://input"), true);
+    error_log("Request received: " . print_r($data, true)); // Debugging
 
-    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $article_id = intval($_GET['id']);
+    if (isset($data['id']) && is_numeric($data['id'])) {
+        $article_id = intval($data['id']);
         $stmt = $conn->prepare("SELECT * FROM articles WHERE id = ?");
         if (!$stmt) {
             throw new Exception("Prepare statement failed: " . $conn->error);

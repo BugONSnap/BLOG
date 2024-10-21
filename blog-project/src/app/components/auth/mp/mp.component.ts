@@ -143,11 +143,7 @@ export class MpComponent implements OnInit {
   }
 
   openModal(article: any) {
-    this.selectedArticle = {
-      ...article,
-      sanitizedSummary: this.sanitizer.bypassSecurityTrustHtml(article.summary)
-    };
-    this.isModalOpen = true;
+    this.router.navigate(['/read-blog', article.id]);
   }
 
   closeModal() {
@@ -209,6 +205,10 @@ export class MpComponent implements OnInit {
 
   closeCreateArticleModal() {
     this.isCreateArticleModalOpen = false;
+  }
+
+  navigateToArticle(article: any) {
+    this.router.navigate(['/read-article', article.id]);
   }
 
 }

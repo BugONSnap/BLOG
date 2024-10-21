@@ -17,6 +17,7 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { AuthService } from './services/auth.service';
 import { QuillModule } from 'ngx-quill';
+import { ReadBlogComponent } from './read-blog/read-blog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { QuillModule } from 'ngx-quill';
     ArticlesComponent,
     EditArticleComponent,
     CreateArticleComponent,
+    ReadBlogComponent,
   ],
 
   imports: [

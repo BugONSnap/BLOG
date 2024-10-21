@@ -9,6 +9,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
+import { ReadBlogComponent } from './read-blog/read-blog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/mp', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'articles', component: ArticlesComponent },
   { path: 'edit-article/:id', component: EditArticleComponent },
   { path: 'create-article', component: CreateArticleComponent },
+  { path: 'read-blog/:id', component: ReadBlogComponent },
   { path: '**', redirectTo: '/mp' }
 ];
 

@@ -22,7 +22,8 @@ export class CreateArticleComponent implements OnInit {
     this.createArticleForm = this.fb.group({
       title: ['', Validators.required],
       summary: ['', Validators.required],
-      profile_image_url: ['', Validators.required]
+      profile_image_url: ['', Validators.required],
+      article_image: ['']
     });
   }
 
@@ -49,26 +50,19 @@ export class CreateArticleComponent implements OnInit {
       summary: document.getElementById('editor')?.innerHTML
     });
 
-    console.log('Form Valid:', this.createArticleForm.valid);
-    console.log('Title Valid:', this.createArticleForm.controls['title'].valid);
-    console.log('Summary Valid:', this.createArticleForm.controls['summary'].valid);
-    console.log('Profile Image URL Valid:', this.createArticleForm.controls['profile_image_url'].valid);
-
     if (this.createArticleForm.valid) {
       const articleData = this.createArticleForm.value;
       articleData.author_unique_id = this.apiService.getAuthorUniqueId();
-      articleData.summary = document.getElementById('editor')?.innerHTML; // Get the HTML content from the editor
       if (this.selectedFile) {
         const formData: FormData = new FormData();
         formData.append('file', this.selectedFile, this.selectedFile.name);
         this.apiService.uploadImage(formData).subscribe(
           (response: any) => {
-            console.log('Image upload response:', response);
-            articleData.profile_image_url = response.url;
-            this.createArticle(articleData);
+            articleData.profile_image_url = response.url;  // Use URL returned from server
+            articleData.article_image = response.url; // Set article image URL
+            this.createArticle(articleData); // Proceed to create the article
           },
           (error) => {
-            console.error('Image upload failed:', error);
             alert('Image upload failed: ' + (error.error?.error || error.message));
           }
         );
@@ -81,16 +75,16 @@ export class CreateArticleComponent implements OnInit {
   createArticle(articleData: any) {
     this.apiService.createArticle(articleData).subscribe(
       (response: any) => {
-        console.log('Article created:', response);
-        this.router.navigate(['/mp']); // Navigate to MpComponent after successful creation
+        this.router.navigate(['/mp']);
       },
       (error) => {
-        console.error('Article creation failed:', error);
         alert('Article creation failed: ' + (error.error?.error || error.message));
       }
     );
   }
-
+  uploadImage(formData: FormData) {
+    return this.apiService.uploadImage(formData);
+  }
   formatText(command: string, value: string = '') {
     document.execCommand(command, false, value);
   }
@@ -102,5 +96,53 @@ export class CreateArticleComponent implements OnInit {
 
   navigateToMp(): void {
     this.router.navigate(['/mp']);
+  }
+
+  // Trigger the hidden file input for image upload
+  triggerImageUpload() {
+    const fileInput = document.getElementById('imageUploadInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
+  }
+
+  // Handle the image file selection
+  onImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const imageUrl = e.target.result;
+
+        // Insert the image into the editor at the current cursor position
+        this.insertImageInEditor(imageUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Insert the selected image into the rich text editor
+  insertImageInEditor(imageUrl: string) {
+    const editor = document.getElementById('editor');
+    if (editor) {
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.style.maxWidth = '100%'; // Ensure the image fits within the editor
+      editor.appendChild(img);
+    }
+  }
+
+  onImagesSelected(event: any) {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          const imageUrl = e.target.result;
+          this.insertImageInEditor(imageUrl);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
   }
 }

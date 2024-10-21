@@ -21,7 +21,8 @@
         <article *ngFor="let article of filteredArticles">
             <div class="article-wrapper">
                 <figure>
-                    <img [src]="article.profile_image_url" alt="Article Image" />
+                    <img [src]="article.profile_image_url" alt="Profile Image" />
+                    <img [src]="article.article_image" alt="Article Image" />
                 </figure>
                 <div class="article-body">
                     <h2>{{ article.title }}</h2>

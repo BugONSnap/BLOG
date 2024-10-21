@@ -34,6 +34,7 @@ if (isset($data['article_id'])) {
     $title = isset($data['title']) ? $conn->real_escape_string($data['title']) : null;
     $summary = isset($data['summary']) ? $conn->real_escape_string($data['summary']) : null;
     $profile_image_url = isset($data['profile_image_url']) ? $conn->real_escape_string($data['profile_image_url']) : null;
+    $article_image = isset($data['article_image']) ? $conn->real_escape_string($data['article_image']) : null;
 
     // Prepare the SQL statement with placeholders
     $sql = "UPDATE articles SET ";
@@ -53,6 +54,11 @@ if (isset($data['article_id'])) {
     if ($profile_image_url !== null) {
         $sql .= "profile_image_url = ?, ";
         $params[] = $profile_image_url;
+        $types .= "s";
+    }
+    if ($article_image !== null) {
+        $sql .= "article_image = ?, ";
+        $params[] = $article_image;
         $types .= "s";
     }
 

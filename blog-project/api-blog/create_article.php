@@ -26,13 +26,14 @@ if ($conn->connect_error) {
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (isset($data['title']) && isset($data['summary']) && isset($data['profile_image_url']) && isset($data['author_unique_id'])) {
+if (isset($data['title']) && isset($data['summary']) && isset($data['profile_image_url']) && isset($data['author_unique_id']) && isset($data['article_image'])) {
     $title = $conn->real_escape_string($data['title']);
     $summary = $conn->real_escape_string($data['summary']);
     $profile_image_url = $conn->real_escape_string($data['profile_image_url']);
     $author_unique_id = $conn->real_escape_string($data['author_unique_id']);
+    $article_image = $conn->real_escape_string($data['article_image']);
 
-    $sql = "INSERT INTO articles (title, summary, profile_image_url, author_unique_id) VALUES ('$title', '$summary', '$profile_image_url', '$author_unique_id')";
+    $sql = "INSERT INTO articles (title, summary, profile_image_url, author_unique_id, article_image) VALUES ('$title', '$summary', '$profile_image_url', '$author_unique_id', '$article_image')";
 
     if ($conn->query($sql) === TRUE) {
         echo json_encode(["message" => "Article created successfully"]);

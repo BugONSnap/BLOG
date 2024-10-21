@@ -18,6 +18,7 @@ export class EditArticleComponent implements OnInit {
   articlesByAuthor: any[] = [];
   uploadedImageId: string | null = null;
   sanitizedSummary: SafeHtml | null = null;
+  selectedFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -107,7 +108,7 @@ export class EditArticleComponent implements OnInit {
       const articleData = {
         id: this.route.snapshot.paramMap.get('id'),
         title: this.editArticleForm.value.title,
-        summary: document.getElementById('editor')?.innerHTML, // Get the HTML content from the editor
+        summary: document.getElementById('editor')?.innerHTML,
         profile_image_url: this.editArticleForm.value.profile_image_url,
         author_unique_id: this.editArticleForm.value.author_unique_id,
         image_id: this.uploadedImageId
@@ -130,10 +131,10 @@ export class EditArticleComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
       const formData: FormData = new FormData();
-      formData.append('file', file, file.name);
+      formData.append('file', this.selectedFile, this.selectedFile.name);
 
       this.apiService.uploadImage(formData).subscribe(
         (response: any) => {
@@ -163,6 +164,37 @@ export class EditArticleComponent implements OnInit {
 
   applyColor(event: any): void {
     const color = event.target.value;
-    this.formatText('foreColor', color); // Apply the selected color to the text
+    this.formatText('foreColor', color);
+  }
+
+  insertImageInEditor(imageUrl: string) {
+    const editor = document.getElementById('editor');
+    if (editor) {
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.style.maxWidth = '100%';
+      editor.appendChild(img);
+    }
+  }
+
+  onImagesSelected(event: any) {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          const imageUrl = e.target.result;
+          this.insertImageInEditor(imageUrl);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
+
+  triggerImageUpload() {
+    const imageUploadInput = document.getElementById('imageUploadInput') as HTMLInputElement;
+    if (imageUploadInput) {
+      imageUploadInput.click();
+    }
   }
 }

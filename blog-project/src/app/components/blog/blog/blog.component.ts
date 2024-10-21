@@ -83,8 +83,7 @@ export class BlogComponent implements OnInit {
   }
 
   openModal(blog: any) {
-    this.selectedBlog = blog;
-    this.isModalOpen = true; // Ensure this is set to true
+    this.router.navigate(['/read-blog', blog.id]);
   }
 
   closeModal() {

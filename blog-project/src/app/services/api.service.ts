@@ -22,7 +22,7 @@ export class ApiService {
   private likeArticleUrl = `${this.apiUrl}/like_article`; // Add the URL for liking articles
   private dislikeArticleUrl = `${this.apiUrl}/dislike_article`; // Add the URL for disliking articles
   private addCommentUrl = `${this.apiUrl}/add_comment`; // Add the URL for adding comments
-  private getArticleByIdUrl = `${this.apiUrl}/get_article_by_id`; // Add the URL for fetching article by ID
+  private getArticleByIdUrl = `${this.apiUrl}/article_by_id`; // Add the URL for fetching article by ID
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -63,7 +63,9 @@ export class ApiService {
   }
 
   getArticleByTitle(title: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/get_article_by_id?id=${title}`);
+    return this.http.post<any>(`${this.apiUrl}/article_by_id`, { title }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getArticlesByAuthor(uniqueId: string): Observable<any> {
@@ -129,7 +131,9 @@ export class ApiService {
   }
 
   getArticleById(articleId: string): Observable<any> {
-    return this.http.get(`http://localhost/api-blog/id=${articleId}`);
+    return this.http.post<any>(this.getArticleByIdUrl, { id: articleId }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getImage(filename: string): string {

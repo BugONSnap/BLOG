@@ -1,0 +1,24 @@
+<header>
+    <div class="overlay">
+        <h1>Welcome to ZentrBlog</h1>
+        <h2>Embark on a journey of discovery and reflection. At Zenblog, we explore ideas, share insights, and embrace inspiration in every form. Whether you're here for tech tips, personal stories, or to catch up on the latest trends, there's something for
+            everyone. Let's navigate this journey together with curiosity and a sense of calm.</h2>
+        <br>
+        <div class="button-container">
+            <button routerLink="/login" *ngIf="!isLoggedIn()">Go to Login</button>
+            <button (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
+            <button routerLink="/register" *ngIf="!isLoggedIn()">Go to Register</button>
+            <button routerLink="/mp" *ngIf="isLoggedIn()" class="create-article-button">Create Article</button>
+            <button routerLink="/blog" class="blog-button">Go to Blog</button>
+        </div>
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="article-container" *ngIf="blog">
+        <img [src]="userDetails.profile_image_url" alt="Author's profile image" class="profile-image">
+        <h1>{{ blog.title }}</h1>
+        <div class="blog" [innerHTML]="sanitizedContent"></div>
+
+    </div>
+</main>

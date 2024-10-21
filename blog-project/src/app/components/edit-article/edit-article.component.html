@@ -22,9 +22,10 @@
                 <button type="button" (click)="formatText('justifyLeft')"><i class="fas fa-align-left"></i></button>
                 <button type="button" (click)="formatText('justifyCenter')"><i class="fas fa-align-center"></i></button>
                 <button type="button" (click)="formatText('justifyRight')"><i class="fas fa-align-right"></i></button>
-
-                <!-- Color picker for text color -->
-                <input style="width: 30px; height: 30px; border: none; padding: 0; margin-left: 5px; cursor: pointer;" type="color" (change)="applyColor($event)" title="Choose text color">
+                <input type="color" (change)="applyColor($event)" title="Choose text color">
+                <button type="button" (click)="triggerImageUpload()">
+                    <i class="fas fa-image"></i>
+                </button>
             </div>
             <div id="editor" class="rich-text-editor" contenteditable="true" [innerHTML]="sanitizedSummary"></div>
             <div *ngIf="editArticleForm.controls['summary'].invalid && editArticleForm.controls['summary'].touched">
@@ -44,6 +45,7 @@
             <button type="button" class="btn btn-secondary" (click)="navigateToBlog()">Back to Blog</button>
         </div>
     </form>
+    <input type="file" id="imageUploadInput" (change)="onImagesSelected($event)" style="display: none;" accept="image/*" multiple>
     <div *ngIf="articlesByAuthor">
         <h2>Articles by Author</h2>
         <ul>

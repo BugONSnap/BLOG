@@ -179,3 +179,8 @@ html {
     margin-left: 5px;
     cursor: pointer;
 }
+
+.blog-container img {
+    max-width: 100%;
+    height: auto;
+}
