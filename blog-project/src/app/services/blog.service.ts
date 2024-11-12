@@ -11,7 +11,7 @@ export class BlogService {
   constructor(private http: HttpClient) {}
 
   getBlogs(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/articles`);
+    return this.http.get('http://localhost/api-blog/get_articles.php');
   }
 
   getUserDetails(uniqueId: string): Observable<any> {

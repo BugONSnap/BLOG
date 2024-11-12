@@ -159,4 +159,18 @@ export class ApiService {
     }
     return uniqueId;
   }
+
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    this.http.post('http://localhost:3000/upload', formData)
+        .subscribe((response: any) => {
+            // Ensure imageUrl is defined in the component where this method is used
+            // this.imageUrl = response.imageUrl; // Uncomment and use in the appropriate component
+        }, (error) => {
+            console.error('Image upload failed', error);
+        });
+  }
 }

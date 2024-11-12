@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Set upload limits
-ini_set('upload_max_filesize', '20M');
-ini_set('post_max_size', '20M');
+ini_set('upload_max_filesize', '100M'); // Increase if needed
+ini_set('post_max_size', '100M'); // Increase if needed
 ini_set('max_input_time', 300);
 ini_set('max_execution_time', 300);
 
@@ -27,11 +27,10 @@ if ($conn->connect_error) {
     exit();
 }
 
-$target_dir = "uploads/";
+$target_dir = "Uploads/";
 if (!is_dir($target_dir)) {
     mkdir($target_dir, 0777, true);
 }
-
 if (isset($_FILES['file'])) {
     $target_file = $target_dir . basename($_FILES['file']['name']);
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -65,10 +64,6 @@ if (isset($_FILES['file'])) {
         http_response_code(400);
         echo json_encode(["error" => "Uploaded file is not a valid image."]);
     }
-} else {
-    http_response_code(400);
-    echo json_encode(["error" => "No file was uploaded."]);
 }
-
 $conn->close();
 ?>

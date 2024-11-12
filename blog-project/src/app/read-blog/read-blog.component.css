@@ -96,15 +96,11 @@ h2 {
 }
 
 .article-container {
-    max-width: 800px;
-    /* Adjust width as needed */
+    max-width: 800%;
     margin: 0 auto;
-    /* Center the container */
     padding: 20px;
     background-color: #fff;
-    /* Optional: Add background color */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Optional: Add shadow */
     border-radius: 10px;
-    /* Optional: Add border radius */
+    width: 85rem;
 }

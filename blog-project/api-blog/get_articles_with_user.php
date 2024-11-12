@@ -9,6 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
+
+// Set upload limits
+ini_set('upload_max_filesize', '100M'); // Increase if needed
+ini_set('post_max_size', '100M'); // Increase if needed
+ini_set('max_input_time', 300);
+ini_set('max_execution_time', 300);
+
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
